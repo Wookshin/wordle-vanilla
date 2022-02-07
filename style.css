@@ -1,28 +1,48 @@
 :root {
+  /* color */
+  --color-black: #212121;
+  --color-grey:  #86888a;
+  --color-light-grey: #d7dadc;
+  --color-dark-grey: #3a3a3c;
 
-/* size */
---font-large: 36px;
---font-medium: 24px;
---font-regular: 16px;
---font-small: 14px;
---font-micro: 10px;
+  /* size */
+  --font-large: 36px;
+  --font-medium: 24px;
+  --font-regular: 16px;
+  --font-small: 14px;
+  --font-micro: 10px;
 }
 
 * {
   box-sizing: border-box;
 }
 
+html {
+  height: 100vh;
+  padding: 0;
+  background-color: var(--color-black);
+  color: var(--color-light-grey);
+}
+
 body {
   margin: auto;
   cursor: default;
   max-width: 600px;
+  height: 100vh;
+  padding: 0;
 }
 
+#game {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+/* navbar */
 #navbar {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  height: 100%;
   padding: 0px 50px;
 }
 
@@ -49,9 +69,13 @@ body {
   margin: 0px 50px;
 }
 
-#main {
-  width: 100%;
-  padding: 20px 0px;
+/* game grid */
+.game__grid {
+  flex-grow: 1;
+  align-content: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .grid__row {
@@ -59,16 +83,16 @@ body {
   justify-content: center;
 }
 
-.main__keyboard {
-  padding-top: 20px;
+.grid__column {
+  border: 3px solid var(--color-dark-grey);
+  width: 70px;
+  height: 70px;
+  margin: 3px;
 }
 
-.grid__column {
-  background-color: white;
-  border: 1px solid grey;
-  width: 60px;
-  height: 60px;
-  margin: 4px;
+/* game keyboard */
+.game__keyboard {
+  padding-bottom: 10px;
 }
 
 .keyboard__row {
@@ -77,13 +101,14 @@ body {
 }
 
 .keyboard__row-key {
-  background-color: white;
-  border: 1px solid grey;
+  background-color: var(--color-grey);
+  font-weight: 600;
   min-width: 45px;
-  height: 50px;
+  height: 60px;
+  line-height: 60px;
   margin: 3px;
+  margin-bottom: 5px;
   padding: 0px 5px;
   border-radius: 5px;
   text-align: center;
-  line-height: 50px;
 }
