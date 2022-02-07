@@ -39,14 +39,14 @@ body {
 }
 
 /* navbar */
-#navbar {
+.navbar__container {
   display: flex;
   justify-content: space-between;
   width: 100%;
   padding: 0px 50px;
 }
 
-.navbar__title {
+.navbar__container-title {
   font-size: var(--font-large);
   font-weight: 800;
   flex-grow: 1;
@@ -54,10 +54,10 @@ body {
   margin-bottom: 10px;
 }
 
-.navbar__help,
-.navbar__title,
-.navbar__statistics,
-.navbar__setting {
+.navbar__container-help,
+.navbar__container-title,
+.navbar__container-statistics,
+.navbar__container-setting {
   padding: 5px;
   text-align: center;
   height: 50px;

@@ -18,8 +18,6 @@ class App {
   }
 
   render() {
-    this.gameGrid.setState(nextState);
-    this.gameKeyboard.setState(nextState);
   }
 }
 
