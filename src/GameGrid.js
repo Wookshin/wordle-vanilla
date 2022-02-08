@@ -3,18 +3,18 @@ import { GridRow } from './GridRow.js'
 
 class GameGrid {
   props = {};
-  rows = null;
+  gridRows = null;
   constructor({target}) {
-    const gameGrid = document.createElement('div');
-    this.gameGrid = gameGrid;
-    gameGrid.classList.add('game__grid');
-    target.appendChild(gameGrid);
+    const $gameGrid = document.createElement('div');
+    this.$gameGrid = $gameGrid;
+    $gameGrid.classList.add('game__grid');
+    target.appendChild($gameGrid);
     
-    this.rows = Array.from({length:5}, ()=> new GridRow({target: gameGrid}));
-    this.rows.forEach(row => {
+    this.gridRows = Array.from({length:5}, ()=> new GridRow({target: $gameGrid}));
+    this.gridRows.forEach(gridRow => {
       for (let i=0; i<5; i++) {
-        let gridColumn = new GridColumn({target: row.gridRow});
-        row.cols.push(gridColumn);
+        let gridColumn = new GridColumn({target: gridRow.$gridRow});
+        gridRow.gridColumns.push(gridColumn);
       }
     });
   }
@@ -24,10 +24,11 @@ class GameGrid {
     this.render();
   }
 
-
   render() {
-    const { x, y, value} = this.props;
-    this.rows[y].cols[x].setProps({value});
+    const { x, y, value, isUpdate} = this.props;
+    if (isUpdate) {
+      this.gridRows[y].gridColumns[x].setProps({value});
+    }
   }
 }
 
