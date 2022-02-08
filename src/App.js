@@ -3,13 +3,16 @@ import GameGrid from "./GameGrid.js"
 import GameKeyboard from "./GameKeyboard.js"
 
 class App {
-  state = [];
+  state = {x:0, y:0, value:null};
 
   constructor(target) {
     this.target = target;
     this.navbar = new Navbar({target});
     this.gameGrid = new GameGrid({target});
     this.gameKeyboard = new GameKeyboard({target});
+    window.addEventListener('keydown', e => {
+      this.setState({...this.state, value:e.key});
+    })
   }
   
   setState(nextState) {
@@ -18,6 +21,7 @@ class App {
   }
 
   render() {
+    this.gameGrid.setProps(this.state);
   }
 }
 

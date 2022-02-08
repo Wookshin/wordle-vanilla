@@ -6,6 +6,7 @@
   --color-dark-grey: #3a3a3c;
 
   /* size */
+  --font-very-large: 48px;
   --font-large: 36px;
   --font-medium: 24px;
   --font-regular: 16px;
@@ -87,7 +88,10 @@ body {
   border: 3px solid var(--color-dark-grey);
   width: 70px;
   height: 70px;
+  line-height: 60px;
   margin: 3px;
+  font-size: var(--font-very-large);
+  text-align: center;
 }
 
 /* game keyboard */
