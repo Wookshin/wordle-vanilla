@@ -1,4 +1,5 @@
 export class GridRow {
+  cols = [];
   constructor({target}) {
     const gridRow = document.createElement('div');
     this.gridRow = gridRow;
