@@ -2,10 +2,10 @@ export class GridColumn {
   props = {};
 
   constructor({target}) {
-    const gridColumn = document.createElement('div');
-    this.gridColumn = gridColumn;
-    gridColumn.classList.add('grid__column');
-    target.appendChild(gridColumn);
+    const $gridColumn = document.createElement('div');
+    this.$gridColumn = $gridColumn;
+    $gridColumn.classList.add('grid__column');
+    target.appendChild($gridColumn);
   }
 
   setProps(nextProps) {
@@ -14,6 +14,6 @@ export class GridColumn {
   }
 
   render() {
-    this.gridColumn.textContent = this.props.value;
+    this.$gridColumn.textContent = this.props.value;
   }
 }
