@@ -1,6 +1,7 @@
 import Navbar from "./Navbar.js"
 import GameGrid from "./GameGrid.js"
 import GameKeyboard from "./GameKeyboard.js"
+import { request } from "./api.js"
 
 class App {
   state = {x:-1, y:0, value:null, words:Array(6).fill(''), isUpdate: false, isFinish: false, result:Array(5).fill('')};
@@ -72,6 +73,10 @@ class App {
     if (x !== 4) {
       return;
     }
+
+    request(words[y]).then(json => {
+      console.log(json);
+    });
 
     [...words[y]].forEach((char, idx) => {
       let resultValue = 'miss';
