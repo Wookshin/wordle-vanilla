@@ -1,7 +1,7 @@
 export class GridColumn {
   props = {};
 
-  constructor({target}) {
+  constructor({ target }) {
     const $gridColumn = document.createElement('div');
     this.$gridColumn = $gridColumn;
     $gridColumn.classList.add('grid__column');
@@ -9,7 +9,7 @@ export class GridColumn {
   }
 
   setProps(nextProps) {
-    this.props = {...this.props, ...nextProps};
+    this.props = { ...this.props, ...nextProps };
     this.render();
   }
 

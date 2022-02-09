@@ -78,10 +78,25 @@ body {
 
 /* game result */
 .game__result {
+  position: absolute;
+  left: 50%;
+  top: 20%;
+  transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 10px 0px;
+  transition: all 1s ease;
+  opacity: 0;
+  z-index: 1;
+  background-color: white;
+  color: black;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+.game__result.show {
+  opacity: 0.9;
 }
 
 .result__answer {
@@ -161,4 +176,20 @@ body {
   padding: 0px 5px;
   border-radius: 5px;
   text-align: center;
+  transition: all var(--animation-duration) ease;
+}
+
+.keyboard__row-key.miss {
+  background-color: var(--color-miss);
+  transform: scaleY(1);
+}
+
+.keyboard__row-key.ball {
+  background-color: var(--color-ball);
+  transform: scaleY(1);
+}
+
+.keyboard__row-key.strike {
+  background-color: var(--color-strike);
+  transform: scaleY(1);
 }
