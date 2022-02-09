@@ -25,9 +25,27 @@ class GameGrid {
   }
 
   render() {
-    const { x, y, value, isUpdate} = this.props;
+    const { x, y, value, isUpdate, isFinish, result} = this.props;
+    
     if (isUpdate) {
+      this.gridRows[y].gridColumns[x].$gridColumn.classList.toggle('inserting');
       this.gridRows[y].gridColumns[x].setProps({value});
+      window.setTimeout(() => {
+        this.gridRows[y].gridColumns[x].$gridColumn.classList.toggle('inserting');
+      }, 100);
+    }
+
+    if (isFinish) {
+      this.gridRows[y].gridColumns.forEach((gridColumn, idx) => {
+        window.setTimeout(() => {
+          gridColumn.$gridColumn.classList.toggle('finishing');
+        }, 250 * (idx+1) + 50);
+
+        window.setTimeout(() => {
+          gridColumn.$gridColumn.classList.add(result[idx]);
+          gridColumn.$gridColumn.classList.toggle('finishing');
+        }, 250 * (idx+1) + 300);
+      });
     }
   }
 }

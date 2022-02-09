@@ -4,6 +4,9 @@
   --color-grey:  #86888a;
   --color-light-grey: #d7dadc;
   --color-dark-grey: #3a3a3c;
+  --color-strike: rgb(83, 141, 78);
+  --color-ball: rgb(181, 159, 59);
+  --color-miss: rgb(58, 58, 60);
 
   /* size */
   --font-very-large: 48px;
@@ -12,6 +15,9 @@
   --font-regular: 16px;
   --font-small: 14px;
   --font-micro: 10px;
+
+  /* animation */
+  --animation-duration: 500ms;
 }
 
 * {
@@ -90,8 +96,34 @@ body {
   height: 70px;
   line-height: 60px;
   margin: 3px;
-  font-size: var(--font-very-large);
+  font-size: var(--font-large);
+  font-weight: 800;
   text-align: center;
+  transition: all var(--animation-duration) ease;
+}
+
+.grid__column.inserting {
+  border: 1px solid white;
+  transform: scale(1.1);
+}
+
+.grid__column.finishing {
+  transform: scaleY(0);
+}
+
+.grid__column.strike {
+  background-color: var(--color-strike);
+  transform: scaleY(1);
+}
+
+.grid__column.ball {
+  background-color: var(--color-ball);
+  transform: scaleY(1);
+}
+
+.grid__column.miss {
+  background-color: var(--color-miss);
+  transform: scaleY(1);
 }
 
 /* game keyboard */
