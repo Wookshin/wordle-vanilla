@@ -1,6 +1,6 @@
 export class GridRow {
   gridColumns = [];
-  constructor({target}) {
+  constructor({ target }) {
     const $gridRow = document.createElement('div');
     this.$gridRow = $gridRow;
     $gridRow.classList.add('grid__row');
