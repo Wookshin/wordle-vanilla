@@ -10,10 +10,10 @@ class Navbar {
   render () {
     this.nav.innerHTML = `
       <div class="navbar__container">
-        <div class="navbar__container-help">?</div>
+        <div class="navbar__container-help"></div>
         <div class="navbar__container-title">WORDLE</div>
-        <div class="navbar__container-statistics">S</div>
-        <div class="navbar__container-setting">T</div>
+        <div class="navbar__container-statistics"></div>
+        <div class="navbar__container-setting"></div>
       </div>
 
       <div class="navbar__line"></div>

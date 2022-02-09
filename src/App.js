@@ -28,6 +28,10 @@ class App {
   }
 
   handleKeydown(e) {
+    if (this.state.isSuccess !== null) {
+      return;
+    }
+
     const value = e.key.toUpperCase();
     const regex = /^[A-Z]$|^BACKSPACE$|^ENTER$/;
     console.log(value);

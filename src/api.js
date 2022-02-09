@@ -1,4 +1,4 @@
-const HEROKU_POINT = 'https://cors-anywhere.herokuapp.com/'
+const HEROKU_POINT = 'https://my-wordle-check-word.herokuapp.com/'
 const API_END_POINT = 'https://ac-dict.naver.com/enko/ac?st=11&r_lt=11&q=';
 const request = async (word) => {
   try {
