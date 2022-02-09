@@ -1,17 +1,19 @@
 import Navbar from "./Navbar.js"
+import GameResult from "./GameResult.js"
 import GameGrid from "./GameGrid.js"
 import GameKeyboard from "./GameKeyboard.js"
 import { request } from "./api.js"
 
 class App {
-  state = {x:-1, y:0, value:null, words:Array(6).fill(''), isUpdate: false, isFinish: false, result:Array(5).fill('')};
+  state = {x:-1, y:0, value:null, words:Array(6).fill(''), isUpdate: false, isFinish: false, isSuccess: null, answer: '', result:Array(5).fill('')};
 
   constructor(target) {
     this.target = target;
     this.navbar = new Navbar({target});
+    this.gameResult = new GameResult({target});
     this.gameGrid = new GameGrid({target});
     this.gameKeyboard = new GameKeyboard({target});
-    this.answer = this.getTodayAnswer();
+    this.state.answer = this.getTodayAnswer();
     window.addEventListener('keydown', this.handleKeydown.bind(this))
   }
   
@@ -21,6 +23,7 @@ class App {
   }
 
   render() {
+    this.gameResult.setProps(this.state);
     this.gameGrid.setProps(this.state);
   }
 
@@ -64,28 +67,32 @@ class App {
     return; 
   }
 
-  handleEnter() {
+  async handleEnter() {
     let x = this.state.x;
     let y = this.state.y; 
-    let words = this.state.words.slice();
-    let result = [];
+    const words = this.state.words.slice();
+    const result = [];
+    const answer = this.state.answer;
 
     if (x !== 4) {
       return;
     }
 
-    request(words[y]).then(json => {
-      console.log(json);
-    });
+    const json = await request(words[y]);
+
+    if(json.items[0].length === 0 || json.items[0][0][0][0].toUpperCase() !== words[y]) {
+      alert('단어가 아닙니다!');
+      return;
+    }
 
     [...words[y]].forEach((char, idx) => {
       let resultValue = 'miss';
-      for (let i = 0; i < this.answer.length; i++) {
-        if (idx === i && this.answer[i] === char) {
+      for (let i = 0; i < answer.length; i++) {
+        if (idx === i && answer[i] === char) {
           resultValue = 'strike';
           break;
         }
-        else if (this.answer[i] === char) {
+        else if (answer[i] === char) {
           resultValue = 'ball';
           break;  
         }
@@ -95,6 +102,16 @@ class App {
     });
 
     this.setState({...this.state, isFinish: true, result});
+    console.log(answer);
+    console.log(words[y]);
+    if (answer === words[y]) {
+      this.setState({...this.state, isFinish: false, isSuccess: true});
+      return;
+    }
+    else if (y === 4) {
+      this.setState({...this.state, isFinish: false, isSuccess: false});
+      return;
+    }
     this.setState({...this.state, x:-1, y:y+1, isFinish: false});
   }
 
