@@ -1,13 +1,13 @@
 class GameKeyboard {
-  constructor({ target, onClick }) {
-    const $gameKeyboard = document.createElement('div');
-    this.$gameKeyboard = $gameKeyboard;
-    $gameKeyboard.classList.add('game__keyboard');
+  constructor ({ target, onClick }) {
+    const $gameKeyboard = document.createElement('div')
+    this.$gameKeyboard = $gameKeyboard
+    $gameKeyboard.classList.add('game__keyboard')
     $gameKeyboard.addEventListener('click', e => {
       if (e.target.matches('.keyboard__row-key')) {
-        onClick(e.target.dataset);
+        onClick(e.target.dataset)
       }
-    });
+    })
     $gameKeyboard.innerHTML = `
       <div class="keyboard__row">
         <div class="keyboard__row-key" data-key="Q">Q</div>
@@ -43,31 +43,31 @@ class GameKeyboard {
         <div class="keyboard__row-key" data-key="M">M</div>
         <div class="keyboard__row-key" data-key="BACKSPACE">BACKSPACE</div>
       </div>
-    `;
-    target.appendChild($gameKeyboard);
+    `
+    target.appendChild($gameKeyboard)
   }
 
-  setProps(nextProps) {
-    this.props = { ...this.props, ...nextProps };
-    this.render();
+  setProps (nextProps) {
+    this.props = { ...this.props, ...nextProps }
+    this.render()
   }
 
-  render() {
-    const { scores, isEnter } = this.props;
+  render () {
+    const { scores, isEnter } = this.props
 
     if (!isEnter) {
-      return;
+      return
     }
 
-    const keys = this.$gameKeyboard.querySelectorAll('.keyboard__row-key');
+    const keys = this.$gameKeyboard.querySelectorAll('.keyboard__row-key')
     keys.forEach($key => {
       scores.forEach(v => {
         if ($key.dataset.key === v.alphabet) {
-          $key.classList.add(v.score);
+          $key.classList.add(v.score)
         }
-      });
-    });
+      })
+    })
   }
 }
 
-export default GameKeyboard;
+export default GameKeyboard
