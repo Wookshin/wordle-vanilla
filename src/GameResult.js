@@ -2,9 +2,9 @@ class GameResult {
   constructor ({ target }) {
     this.props = {}
     const $gameResult = document.createElement('div')
-    this.$gameResult = $gameResult
     $gameResult.classList.add('game__result')
     target.appendChild($gameResult)
+    this.$gameResult = $gameResult
   }
 
   setProps (nextProps) {

@@ -6,9 +6,9 @@ class GameGrid {
     this.props = {}
     this.gridRows = null
     const $gameGrid = document.createElement('div')
-    this.$gameGrid = $gameGrid
     $gameGrid.classList.add('game__grid')
     target.appendChild($gameGrid)
+    this.$gameGrid = $gameGrid
 
     this.gridRows = Array.from(
       { length: 5 },
@@ -45,12 +45,12 @@ class GameGrid {
       this.gridRows[y].gridColumns.forEach((gridColumn, idx) => {
         window.setTimeout(() => {
           gridColumn.$gridColumn.classList.toggle('finishing')
-        }, 250 * (idx + 1) + 50)
+        }, 250 * idx)
 
         window.setTimeout(() => {
           gridColumn.$gridColumn.classList.add(scores[idx].score)
           gridColumn.$gridColumn.classList.toggle('finishing')
-        }, 250 * (idx + 1) + 300)
+        }, 250 * (idx + 1) + 250)
       })
     }
   }

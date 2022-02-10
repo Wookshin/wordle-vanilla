@@ -4,10 +4,13 @@ import GameGrid from './GameGrid.js'
 import GameKeyboard from './GameKeyboard.js'
 import { getWordFromNaver } from './api.js'
 
+const INIT_INDEX = -1
+const LAST_INDEX = 4
+
 class App {
   constructor (target) {
     this.state = {
-      x: -1,
+      x: INIT_INDEX,
       y: 0,
       value: null,
       inputWords: Array(6).fill(''),
@@ -17,7 +20,6 @@ class App {
       answer: '',
       scores: Array(5).fill('')
     }
-    this.target = target
     this.navbar = new Navbar({ target })
     this.gameResult = new GameResult({ target })
     this.gameGrid = new GameGrid({ target })
@@ -25,6 +27,7 @@ class App {
       target,
       onClick: this.handleInput.bind(this)
     })
+    this.target = target
     this.state.answer = this.getTodayAnswer()
     window.addEventListener('keydown', this.handleInput.bind(this))
   }
@@ -66,7 +69,7 @@ class App {
   }
 
   handleBackspace () {
-    if (this.state.x === -1) {
+    if (this.state.x === INIT_INDEX) {
       return
     }
 
@@ -81,7 +84,7 @@ class App {
   }
 
   async handleEnter () {
-    if (this.state.x !== 4) {
+    if (this.state.x !== LAST_INDEX) {
       return
     }
 
@@ -119,15 +122,15 @@ class App {
 
     if (answer === inputWords[y]) {
       this.setState({ ...this.state, isEnter: false, isSuccess: true })
-    } else if (y === 4) {
+    } else if (y === LAST_INDEX) {
       this.setState({ ...this.state, isEnter: false, isSuccess: false })
     } else {
-      this.setState({ ...this.state, x: -1, y: y + 1, isEnter: false })
+      this.setState({ ...this.state, x: INIT_INDEX, y: y + 1, isEnter: false })
     }
   }
 
   handleAlphabet (value) {
-    if (this.state.x === 4) {
+    if (this.state.x === LAST_INDEX) {
       return
     }
 
