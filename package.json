@@ -1,0 +1,22 @@
+{
+  "name": "wordle-vanilla",
+  "version": "1.0.0",
+  "description": "wordle clong coding",
+  "main": "main.js",
+  "devDependencies": {
+    "standard": "*"
+  },
+  "scripts": {
+    "test": "standard && node my-tests.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Wookshin/wordle-vanilla.git"
+  },
+  "author": "wookshin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Wookshin/wordle-vanilla/issues"
+  },
+  "homepage": "https://github.com/Wookshin/wordle-vanilla#readme"
+}

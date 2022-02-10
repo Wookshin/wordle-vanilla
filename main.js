@@ -1,3 +1,3 @@
-import App from "./src/App.js"
+import App from './src/App.js'
 
-const app = new App(document.querySelector('#game'));
+const app = new App(document.querySelector('#game'))

@@ -1,152 +1,151 @@
-import Navbar from './Navbar.js';
-import GameResult from './GameResult.js';
-import GameGrid from './GameGrid.js';
-import GameKeyboard from './GameKeyboard.js';
-import { getWordFromNaver } from './api.js';
+import Navbar from './Navbar.js'
+import GameResult from './GameResult.js'
+import GameGrid from './GameGrid.js'
+import GameKeyboard from './GameKeyboard.js'
+import { getWordFromNaver } from './api.js'
 
 class App {
-  state = {
-    x: -1,
-    y: 0,
-    value: null,
-    inputWords: Array(6).fill(''),
-    isUpdate: false,
-    isEnter: false,
-    isSuccess: null,
-    answer: '',
-    scores: Array(5).fill(''),
-  };
-
-  constructor(target) {
-    this.target = target;
-    this.navbar = new Navbar({ target });
-    this.gameResult = new GameResult({ target });
-    this.gameGrid = new GameGrid({ target });
+  constructor (target) {
+    this.state = {
+      x: -1,
+      y: 0,
+      value: null,
+      inputWords: Array(6).fill(''),
+      isUpdate: false,
+      isEnter: false,
+      isSuccess: null,
+      answer: '',
+      scores: Array(5).fill('')
+    }
+    this.target = target
+    this.navbar = new Navbar({ target })
+    this.gameResult = new GameResult({ target })
+    this.gameGrid = new GameGrid({ target })
     this.gameKeyboard = new GameKeyboard({
       target,
-      onClick: this.handleInput.bind(this),
-    });
-    this.state.answer = this.getTodayAnswer();
-    window.addEventListener('keydown', this.handleInput.bind(this));
+      onClick: this.handleInput.bind(this)
+    })
+    this.state.answer = this.getTodayAnswer()
+    window.addEventListener('keydown', this.handleInput.bind(this))
   }
 
-  setState(nextState) {
-    this.state = nextState;
-    this.render();
+  setState (nextState) {
+    this.state = nextState
+    this.render()
   }
 
-  render() {
-    this.gameResult.setProps(this.state);
-    this.gameGrid.setProps(this.state);
-    this.gameKeyboard.setProps(this.state);
+  render () {
+    this.gameResult.setProps(this.state)
+    this.gameGrid.setProps(this.state)
+    this.gameKeyboard.setProps(this.state)
   }
 
-  handleInput(e) {
+  handleInput (e) {
     if (this.state.isSuccess !== null) {
-      return;
+      return
     }
 
-    const value = e.key.toUpperCase();
-    const regex = /^[A-Z]$|^BACKSPACE$|^ENTER$/;
+    const value = e.key.toUpperCase()
+    const regex = /^[A-Z]$|^BACKSPACE$|^ENTER$/
 
     if (!regex.test(value)) {
-      return;
+      return
     }
 
     if (value === 'BACKSPACE') {
-      this.handleBackspace();
+      this.handleBackspace()
     } else if (value === 'ENTER') {
-      this.handleEnter();
+      this.handleEnter()
     } else {
-      this.handleAlphabet(value);
+      this.handleAlphabet(value)
     }
   }
 
-  getTodayAnswer() {
-    return 'WORLD';
+  getTodayAnswer () {
+    return 'WORLD'
   }
 
-  handleBackspace() {
+  handleBackspace () {
     if (this.state.x === -1) {
-      return;
+      return
     }
 
-    const x = this.state.x;
-    const y = this.state.y;
-    const inputWords = this.state.inputWords.slice();
+    const x = this.state.x
+    const y = this.state.y
+    const inputWords = this.state.inputWords.slice()
 
-    inputWords[y] = inputWords[y].substr(0, inputWords[y].length - 1);
+    inputWords[y] = inputWords[y].substr(0, inputWords[y].length - 1)
 
-    this.setState({ ...this.state, value: '', inputWords, isUpdate: true });
-    this.setState({ ...this.state, x: x - 1, isUpdate: false });
+    this.setState({ ...this.state, value: '', inputWords, isUpdate: true })
+    this.setState({ ...this.state, x: x - 1, isUpdate: false })
   }
 
-  async handleEnter() {
+  async handleEnter () {
     if (this.state.x !== 4) {
-      return;
+      return
     }
 
-    const y = this.state.y;
-    const inputWords = this.state.inputWords.slice();
-    const scores = [];
-    const answer = this.state.answer;
-    const json = await getWordFromNaver(inputWords[y]);
+    const y = this.state.y
+    const inputWords = this.state.inputWords.slice()
+    const scores = []
+    const answer = this.state.answer
+    const json = await getWordFromNaver(inputWords[y])
 
     if (
       json.items[0].length === 0 ||
       json.items[0][0][0][0].toUpperCase() !== inputWords[y]
     ) {
-      alert(`${inputWords[y]}는 단어가 아닙니다!`);
-      return;
+      window.alert(`${inputWords[y]}는 단어가 아닙니다!`)
+      return
     }
 
     [...inputWords[y]].forEach((alphabet, idx) => {
-      let score = 'miss';
+      let score = 'miss'
 
       for (let i = 0; i < answer.length; i++) {
         if (idx === i && answer[i] === alphabet) {
-          score = 'strike';
-          break;
+          score = 'strike'
+          break
         } else if (answer[i] === alphabet) {
-          score = 'ball';
-          break;
+          score = 'ball'
+          break
         }
       }
 
-      scores.push({ alphabet, score });
-    });
+      scores.push({ alphabet, score })
+    })
 
-    this.setState({ ...this.state, scores, isEnter: true });
+    this.setState({ ...this.state, scores, isEnter: true })
 
     if (answer === inputWords[y]) {
-      this.setState({ ...this.state, isEnter: false, isSuccess: true });
+      this.setState({ ...this.state, isEnter: false, isSuccess: true })
     } else if (y === 4) {
-      this.setState({ ...this.state, isEnter: false, isSuccess: false });
+      this.setState({ ...this.state, isEnter: false, isSuccess: false })
     } else {
-      this.setState({ ...this.state, x: -1, y: y + 1, isEnter: false });
+      this.setState({ ...this.state, x: -1, y: y + 1, isEnter: false })
     }
   }
 
-  handleAlphabet(value) {
+  handleAlphabet (value) {
     if (this.state.x === 4) {
-      return;
+      return
     }
 
-    const x = this.state.x;
-    const y = this.state.y;
-    let inputWords = this.state.inputWords.slice();
+    const x = this.state.x
+    const y = this.state.y
+    const inputWords = this.state.inputWords.slice()
 
-    inputWords[y] = inputWords[y] + value;
+    inputWords[y] = inputWords[y] + value
 
     this.setState({
       ...this.state,
       x: x + 1,
       value,
       inputWords,
-      isUpdate: true,
-    });
-    this.setState({ ...this.state, isUpdate: false });
+      isUpdate: true
+    })
+    this.setState({ ...this.state, isUpdate: false })
   }
 }
 
-export default App;
+export default App

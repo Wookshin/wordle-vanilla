@@ -1,8 +1,8 @@
 class Navbar {
-  constructor({ target }) {
-    const $nav = document.createElement('nav');
-    this.$nav = $nav;
-    $nav.id = 'navbar';
+  constructor ({ target }) {
+    const $nav = document.createElement('nav')
+    this.$nav = $nav
+    $nav.id = 'navbar'
     $nav.innerHTML = `
     <div class="navbar__container">
     <div class="navbar__container-help"></div>
@@ -12,9 +12,9 @@ class Navbar {
     </div>
     
     <div class="navbar__line"></div>
-    `;
-    target.appendChild($nav);
+    `
+    target.appendChild($nav)
   }
 }
 
-export default Navbar;
+export default Navbar
