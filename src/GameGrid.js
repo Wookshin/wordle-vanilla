@@ -6,9 +6,9 @@ class GameGrid {
     this.props = {}
     this.gridRows = null
     const $gameGrid = document.createElement('div')
-    this.$gameGrid = $gameGrid
     $gameGrid.classList.add('game__grid')
     target.appendChild($gameGrid)
+    this.$gameGrid = $gameGrid
 
     this.gridRows = Array.from(
       { length: 5 },

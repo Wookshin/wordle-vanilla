@@ -17,7 +17,6 @@ class App {
       answer: '',
       scores: Array(5).fill('')
     }
-    this.target = target
     this.navbar = new Navbar({ target })
     this.gameResult = new GameResult({ target })
     this.gameGrid = new GameGrid({ target })
@@ -25,6 +24,7 @@ class App {
       target,
       onClick: this.handleInput.bind(this)
     })
+    this.target = target
     this.state.answer = this.getTodayAnswer()
     window.addEventListener('keydown', this.handleInput.bind(this))
   }

@@ -1,7 +1,6 @@
 class Navbar {
   constructor ({ target }) {
     const $nav = document.createElement('nav')
-    this.$nav = $nav
     $nav.id = 'navbar'
     $nav.innerHTML = `
     <div class="navbar__container">
@@ -14,6 +13,7 @@ class Navbar {
     <div class="navbar__line"></div>
     `
     target.appendChild($nav)
+    this.$nav = $nav
   }
 }
 

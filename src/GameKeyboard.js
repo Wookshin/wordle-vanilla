@@ -1,7 +1,6 @@
 class GameKeyboard {
   constructor ({ target, onClick }) {
     const $gameKeyboard = document.createElement('div')
-    this.$gameKeyboard = $gameKeyboard
     $gameKeyboard.classList.add('game__keyboard')
     $gameKeyboard.addEventListener('click', e => {
       if (e.target.matches('.keyboard__row-key')) {
@@ -45,6 +44,7 @@ class GameKeyboard {
       </div>
     `
     target.appendChild($gameKeyboard)
+    this.$gameKeyboard = $gameKeyboard
   }
 
   setProps (nextProps) {
