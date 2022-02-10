@@ -123,12 +123,14 @@ body {
   border: 3px solid var(--color-dark-grey);
   width: 70px;
   height: 70px;
-  line-height: 60px;
   margin: 3px;
   font-size: var(--font-large);
   font-weight: 800;
   text-align: center;
   transition: all var(--animation-duration) ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .grid__column.inserting {
