@@ -90,8 +90,7 @@ class App {
 
     const y = this.state.y
     const inputWords = this.state.inputWords.slice()
-    const scores = []
-    const answer = this.state.answer
+    const checkList = { answer: this.state.answer, scores: Array.from({ length: 5}, () => ({ alphabet: '', score:'miss' })) }
     const json = await getWordFromNaver(inputWords[y])
 
     if (
@@ -103,24 +102,28 @@ class App {
     }
 
     [...inputWords[y]].forEach((alphabet, idx) => {
-      let score = 'miss'
-
-      for (let i = 0; i < answer.length; i++) {
-        if (idx === i && answer[i] === alphabet) {
-          score = 'strike'
+      // check strike
+      for (let i = 0; i < checkList.answer.length; i++) {
+        if (idx === i && checkList.answer[i] === alphabet) {
+          checkList.scores[i].alphabet = alphabet
+          checkList.scores[i].score = 'strike'
           break
-        } else if (answer[i] === alphabet) {
-          score = 'ball'
+        } 
+      }
+
+      // check ball
+      for (let i = 0; i < checkList.answer.length; i++) {
+        if (checkList.scores[i].score === 'miss' && checkList.answer[i] === alphabet) {
+          checkList.scores[i].alphabet = alphabet
+          checkList.scores[i].score = 'ball'
           break
         }
       }
-
-      scores.push({ alphabet, score })
     })
+    
+    this.setState({ ...this.state, scores: checkList.scores, isEnter: true })
 
-    this.setState({ ...this.state, scores, isEnter: true })
-
-    if (answer === inputWords[y]) {
+    if (checkList.answer === inputWords[y]) {
       this.setState({ ...this.state, isEnter: false, isSuccess: true })
     } else if (y === LAST_INDEX) {
       this.setState({ ...this.state, isEnter: false, isSuccess: false })
