@@ -211,6 +211,13 @@ body {
     --font-small: 10px;
     --font-micro: 6px;
   }
+  .navbar__container {
+    padding: 0px 20px;
+  }
+
+  .game__grid {
+    margin-top: 10px;
+  }
 
   .grid__column {
     min-height: 40px;

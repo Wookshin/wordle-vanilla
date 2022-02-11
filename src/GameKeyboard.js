@@ -40,7 +40,7 @@ class GameKeyboard {
         <div class="keyboard__row-key" data-key="B">B</div>
         <div class="keyboard__row-key" data-key="N">N</div>
         <div class="keyboard__row-key" data-key="M">M</div>
-        <div class="keyboard__row-key" data-key="BACKSPACE">BACKSPACE</div>
+        <div class="keyboard__row-key" data-key="BACKSPACE">←</div>
       </div>
     `
     target.appendChild($gameKeyboard)
