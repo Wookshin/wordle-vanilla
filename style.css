@@ -160,6 +160,8 @@ body {
 /* game keyboard */
 .game__keyboard {
   padding-bottom: 10px;
+  display: flex;
+  flex-direction: column;
 }
 
 .keyboard__row {
@@ -169,6 +171,7 @@ body {
 
 .keyboard__row-key {
   background-color: var(--color-grey);
+  font-size: var(--font-regular);
   font-weight: 600;
   min-width: 45px;
   height: 60px;
@@ -194,4 +197,21 @@ body {
 .keyboard__row-key.strike {
   background-color: var(--color-strike);
   transform: scaleY(1);
+}
+
+@media screen and (max-width: 550px) {
+  :root {
+    /* size */
+    --font-very-large: 30px;
+    --font-large: 25px;
+    --font-medium: 16px;
+    --font-regular: 12px;
+    --font-small: 10px;
+    --font-micro: 6px;
+  }
+
+  .keyboard__row-key {
+    min-width: 30px;
+    flex-grow: 1;
+  }
 }
