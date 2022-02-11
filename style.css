@@ -46,6 +46,10 @@ body {
 }
 
 /* navbar */
+#navbar {
+  padding-bottom: 10px;
+}
+
 .navbar__container {
   display: flex;
   justify-content: space-between;
@@ -57,8 +61,6 @@ body {
   font-size: var(--font-large);
   font-weight: 800;
   flex-grow: 1;
-  margin-left: 20px;
-  margin-bottom: 10px;
 }
 
 .navbar__container-help,
@@ -67,8 +69,9 @@ body {
 .navbar__container-setting {
   padding: 5px;
   text-align: center;
-  height: 50px;
-  line-height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .navbar__line {
@@ -112,6 +115,7 @@ body {
   justify-content: center;
   display: flex;
   flex-direction: column;
+  padding-bottom: 10px;
 }
 
 .grid__row {
@@ -210,13 +214,6 @@ body {
     --font-regular: 12px;
     --font-small: 10px;
     --font-micro: 6px;
-  }
-  .navbar__container {
-    padding: 0px 20px;
-  }
-
-  .game__grid {
-    margin-top: 10px;
   }
 
   .grid__column {
