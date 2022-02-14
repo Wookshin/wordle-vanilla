@@ -28,7 +28,7 @@ class GameGrid {
   }
 
   render () {
-    const { x, y, value, scores, isUpdate, isEnter } = this.props
+    const { x, y, value, scores, isUpdate, isEnter, isLoading } = this.props
 
     if (isUpdate) {
       this.gridRows[y].gridColumns[x].$gridColumn.classList.toggle('inserting')

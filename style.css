@@ -108,6 +108,29 @@ body {
   font-size: var(--font-medium);
 }
 
+/* loading dialog */ 
+/* game result */
+.game__loading {
+  position: absolute;
+  left: 50%;
+  top: 20%;
+  transform: translateX(-50%);
+  margin: 10px 0px;
+  transition: all 1s ease;
+  opacity: 0;
+  z-index: 1;
+  background-color: white;
+  color: black;
+  padding: 8px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: var(--font-medium);
+}
+
+.game__loading.show {
+  opacity: 0.9;
+}
+
 /* game grid */
 .game__grid {
   flex-grow: 1;

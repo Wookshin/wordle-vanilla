@@ -3,6 +3,7 @@ import GameResult from './GameResult.js'
 import GameGrid from './GameGrid.js'
 import GameKeyboard from './GameKeyboard.js'
 import { getWordFromNaver } from './api.js'
+import LoadingDialog from './LoadingDialog.js'
 
 const INIT_INDEX = -1
 const LAST_INDEX = 4
@@ -16,12 +17,14 @@ class App {
       inputWords: Array(6).fill(''),
       isUpdate: false,
       isEnter: false,
+      isLoading: false,
       isSuccess: null,
       answer: '',
       scores: Array(5).fill('')
     }
     this.navbar = new Navbar({ target })
     this.gameResult = new GameResult({ target })
+    this.loadingDialog = new LoadingDialog({ target })
     this.gameGrid = new GameGrid({ target })
     this.gameKeyboard = new GameKeyboard({
       target,
@@ -39,6 +42,7 @@ class App {
 
   render () {
     this.gameResult.setProps(this.state)
+    this.loadingDialog.setProps(this.state)
     this.gameGrid.setProps(this.state)
     this.gameKeyboard.setProps(this.state)
   }
@@ -91,7 +95,10 @@ class App {
     const y = this.state.y
     const inputWords = this.state.inputWords.slice()
     const checkList = { answer: this.state.answer, scores: Array.from({ length: 5}, () => ({ alphabet: '', score:'miss' })) }
+    
+    this.setState({ ...this.state, isLoading: true })
     const json = await getWordFromNaver(inputWords[y])
+    this.setState({ ...this.state, isLoading: false })
 
     if (
       json.items[0].length === 0 ||
@@ -108,7 +115,7 @@ class App {
           checkList.scores[i].alphabet = alphabet
           checkList.scores[i].score = 'strike'
           break
-        } 
+        }
       }
 
       // check ball
